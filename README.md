@@ -12,19 +12,17 @@
 
 ## 📚 Table of Contents
 
-- Introduction
-
-- Introduction to Change Data Capture (CDC)
-
-- Introduction to Tasks in Snowflake
-
-- Introduction to Streams in Snowflake
-
-- Tutorial
-
-- Conclusion
-
-- Additional Resources
+- [🚀 Snowflake Tasks and Streams Tutorial](#-snowflake-tasks-and-streams-tutorial)
+  - [🎯 Learning Objectives](#-learning-objectives)
+  - [📚 Table of Contents](#-table-of-contents)
+    - [🎉 Introduction](#-introduction)
+    - [Introduction to Changed Data Capture (CDC)](#introduction-to-changed-data-capture-cdc)
+    - [📝 Introduction to Tasks in Snowflake](#-introduction-to-tasks-in-snowflake)
+    - [🌊 Introduction to Streams in Snowflake](#-introduction-to-streams-in-snowflake)
+    - [💡Tutorial](#tutorial)
+    - [🎈 Conclusion](#-conclusion)
+  - [📖 Additional Resources](#-additional-resources)
+  - [⚠️ Disclaimer](#️-disclaimer)
 
 ### 🎉 Introduction
 
@@ -64,7 +62,7 @@ Snowflake supports different types of Streams depending on the source object and
 
 In this tutorial, we’ll be exploring how to construct a database, schema, and table within Snowflake. We’ll also delve into creating a stream and a task, and implementing the concept of Slowly Changing Dimensions (SCD) Type 2 using a stored procedure.
 
-[Link to Tutorial](https://quickstarts.snowflake.com/guide/getting_started_with_streams_and_tasks/#0)
+[Link to Tutorial](https://github.com/ElliottFairhall/Snowflake_Tasks_Streams/blob/main/tutorial/STREAM%26TASKTUTORIAL.md)
 
 By the end of this tutorial, you’ll have gained a comprehensive understanding of how to leverage some of Snowflake’s robust features to efficiently capture and process data changes in a scalable manner.
 
