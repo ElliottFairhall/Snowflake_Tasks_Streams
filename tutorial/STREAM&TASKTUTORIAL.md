@@ -126,8 +126,9 @@ The ``START_DATE``, ``END_DATE``, and ``IS_LATEST`` fields have been added to th
 The following command will create the **STREAM_PRODUCTS** object with commenting using the ``COMMENT`` syntax to support data governance holding information on the Change Data Capture (CDC) from **SOURCE_PRODUCTS**.
 
 ```sql
-CREATE
-OR REPLACE STREAM BRONZE.PRODUCTS.STREAM_PRODUCTS COMMENT = 'This stream collects CDC (Change Data Capture) on SOURCE_PRODUCTS.' ON TABLE SOURCE_PRODUCTS;
+CREATE OR REPLACE STREAM BRONZE.PRODUCTS.STREAM_PRODUCTS
+ON TABLE SOURCE_PRODUCTS
+COMMENT = 'This stream collects CDC (Change Data Capture) on SOURCE_PRODUCTS.';
 ```
 
 ## Create the Procedure
