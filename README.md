@@ -46,7 +46,7 @@ Tasks require compute resources to execute SQL code. You can choose between the 
 
 Streams are powerful objects within Snowflake that allow you to track changes in data objects like tables, views, or external tables. They capture the change data capture (CDC) records for an object and store them as a point in time snapshot. The columns `METADATA$ACTION`,  `METADATA$ISUPDATE` and `METADATA$ROW_ID` are added to the table when creating a stream. 
 
-Below are these fields defined.
+These fields are defined below.
 
 | **Column Name**	| **Description**| 
 |--------------|-----------|

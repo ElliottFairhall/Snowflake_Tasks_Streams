@@ -143,6 +143,7 @@ CREATE OR REPLACE PROCEDURE BRONZE.PRODUCTS.PROC_DIM_PRODUCTS()
     LANGUAGE SQL EXECUTE
     AS CALLER
     AS $$
+    BEGIN
     -- First, handle the updated records
     MERGE INTO BRONZE.PRODUCTS.PRODUCTS
     AS target USING BRONZE.PRODUCTS.STREAM_PRODUCTS
@@ -210,6 +211,7 @@ WHERE
             AND target.END_DATE IS NULL
     );
 RETURN 'Procedure PROC_DIM_PRODUCTS executed successfully';
+    END;
 $$;
 ```
 
@@ -226,10 +228,20 @@ WHEN SYSTEM$STREAM_HAS_DATA('STREAM_PRODUCTS') AS CALL PROC_DIM_PRODUCTS();
 
 The **TASK_PRODUCTS** will check for new records added to **STREAM_PRODUCTS** every 5 minutes and be used as a trigger to execute a stored procedure called **PROC_DIM_PRODUCTS** . 
 
+Being in a role that has only OWNERSHIP privilege on a task is not enough to execute a task. It should also have EXECUTE TASK privilege. 
+see: [Link to Snowflake article about executing a task privilege](https://community.snowflake.com/s/article/Does-a-role-having-only-OWNERSHIP-privilege-on-a-task-is-enough-to-execute-a-task)
+
+Assuming you have created your TASK using the sysadmin role, running the following script will grant that role the required permissions
+
+```sql
+use role accountadmin;
+grant EXECUTE TASK on account to role sysadmin;
+```
+
 The following command will ``RESUME`` **TASK_PRODUCTS** :
 
 ```sql 
-ALTER TASK TASK_LOAD_ORACLE_PRODUCTS RESUME;
+ALTER TASK TASK_PRODUCTS RESUME;
 ```
 
 By default Snowflake does not activate tasks straight away and if left running may incur costs associated with your trial account.
