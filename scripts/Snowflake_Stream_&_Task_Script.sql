@@ -47,14 +47,14 @@ OR REPLACE TABLE BRONZE.PRODUCTS.PRODUCTS COMMENT = 'This table stores product d
     IS_LATEST BOOLEAN COMMENT 'A boolean flag indicating whether the row is the latest version.'
 );
 -- Creating the Stream
-CREATE
-OR REPLACE STREAM BRONZE.PRODUCTS.STREAM_PRODUCTS COMMENT = 'This stream collects CDC (Change Data Capture) on SOURCE_PRODUCTS.' ON TABLE SOURCE_PRODUCTS;
+CREATE OR REPLACE STREAM BRONZE.PRODUCTS.STREAM_PRODUCTS COMMENT = 'This stream collects CDC (Change Data Capture) on SOURCE_PRODUCTS.' ON TABLE SOURCE_PRODUCTS;
 -- Create the Procedure
 CREATE OR REPLACE PROCEDURE BRONZE.PRODUCTS.PROC_DIM_PRODUCTS()
     RETURNS VARCHAR
     LANGUAGE SQL EXECUTE
     AS CALLER
     AS $$ -- First, handle the updated records
+    BEGIN
     MERGE INTO BRONZE.PRODUCTS.PRODUCTS
     AS target USING BRONZE.PRODUCTS.STREAM_PRODUCTS
     AS source ON target.PRODUCT_ID = source.PRODUCT_ID
@@ -111,6 +111,7 @@ FROM
     BRONZE.PRODUCTS.STREAM_PRODUCTS AS source
 WHERE
     source.METADATA$ACTION = 'insert'
+    source.METADATA$ACTION = 'insert'
     AND NOT EXISTS (
         SELECT
             1
@@ -121,6 +122,7 @@ WHERE
             AND target.END_DATE IS NULL
     );
 RETURN 'Procedure PROC_DIM_PRODUCTS executed successfully';
+    END;
 $$;
 -- Creating a Task
     CREATE
